@@ -62,6 +62,12 @@ export const MAX_HOLIDAYS_PER_YEAR = 26
 export const LUX_TRIP_THRESHOLD = 5000000
 export const LUX_TRIP_COST = 150000
 export const MAX_LUX_TRIPS_PER_YEAR = 6
+// A new car as a frequency: an average new car (ACEA EU transaction price ~EUR
+// 36k, Baltics a little less, so EUR 35k blended) for normal pots, or a luxury
+// car (ultra-luxury flagship: Bentley / Range Rover Autobiography / top Porsche,
+// ~EUR 200k) for pots at/above the luxury threshold.
+export const CAR_PRICE = 35000
+export const LUX_CAR_PRICE = 200000
 // Lifestyle tiers, most expensive first: a prestige-district home, a city-centre
 // flat, or the suburbs. Trading down on rent frees up money to travel, so a
 // smaller number can still buy holidays in a cheaper tier.
@@ -89,6 +95,22 @@ export function lifestyle(grossMonthly, country, data, tier = 'luxury', target =
   // money. Smaller pots don't show it (pjEscapesPerYear stays 0).
   const luxe = target >= LUX_TRIP_THRESHOLD
   const pjEscapesPerYear = luxe ? Math.min(MAX_LUX_TRIPS_PER_YEAR, Math.floor((leftover * 12) / LUX_TRIP_COST)) : 0
+
+  // A new car as a frequency: "X a year" once they can afford one-plus a year,
+  // otherwise "every Y years". Big pots price a luxury car instead of an average.
+  const carPrice = luxe ? LUX_CAR_PRICE : CAR_PRICE
+  const carsPerYearRaw = leftover > 0 ? (leftover * 12) / carPrice : 0
+  let carKind = 'everyYears'
+  let carValue = 25
+  if (carsPerYearRaw >= 1) {
+    carKind = 'perYear'
+    carValue = Math.floor(carsPerYearRaw)
+  } else if (carsPerYearRaw > 0) {
+    const yrs = Math.round(1 / carsPerYearRaw)
+    if (yrs <= 1) { carKind = 'perYear'; carValue = 1 }
+    else { carKind = 'everyYears'; carValue = Math.min(25, yrs) }
+  }
+
   const affords = net >= living
   const coverPct = living > 0 ? Math.max(1, Math.round((net / living) * 100)) : 100
 
@@ -106,6 +128,9 @@ export function lifestyle(grossMonthly, country, data, tier = 'luxury', target =
     mealsPerWeek,
     holidaysPerYear,
     pjEscapesPerYear,
+    carKind,
+    carValue,
+    carPrice,
     luxe,
     mealPrice: MEAL_PRICE,
     tripCost: TRIP_COST,

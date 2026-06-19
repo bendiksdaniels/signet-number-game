@@ -46,6 +46,17 @@ function Jet() {
   )
 }
 
+function Car() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M3 13l1.6-4.6A2 2 0 0 1 6.5 7h11a2 2 0 0 1 1.9 1.4L21 13v4a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1v-.8H6.2v.8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" />
+      <path d="M3.2 13h17.6" />
+      <circle cx="7.5" cy="16" r="1.1" />
+      <circle cx="16.5" cy="16" r="1.1" />
+    </svg>
+  )
+}
+
 export default function Afford({ life, tier, setTier }) {
   const { t } = useT()
   const reduce = useReducedMotion()
@@ -57,6 +68,12 @@ export default function Afford({ life, tier, setTier }) {
   // Big pots ALSO get a private-jet escape line on top of the regular holidays
   // (calc flags it by pot size), and the assumption gains the jet cost.
   const luxe = life.luxe
+  // The car line reads either "X (luxury) cars a year" or "Y years between cars".
+  const carLabelKey = life.carKind === 'everyYears'
+    ? (luxe ? 'luxCarEvery' : 'carEvery')
+    : life.carValue === 1
+      ? (luxe ? 'luxCarAYear' : 'carAYear')
+      : (luxe ? 'luxCarsAYear' : 'carsAYear')
 
   return (
     <div className="afford">
@@ -104,8 +121,12 @@ export default function Afford({ life, tier, setTier }) {
                 <b className="tnum">{life.pjEscapesPerYear}</b> {t(life.pjEscapesPerYear === 1 ? 'pjEscapeAYear' : 'pjEscapesAYear')}
               </span>
             )}
+            <span className={luxe ? 'afford__metric afford__metric--lux' : 'afford__metric'}>
+              <Car />
+              <b className="tnum">{life.carValue}</b> {t(carLabelKey)}
+            </span>
           </div>
-          <span className="afford__assume">{t(luxe ? 'affordAssumeLuxe' : 'affordAssume', { meal: groupSpaces(life.mealPrice), trip: groupSpaces(life.tripCost), pjTrip: groupSpaces(life.luxTripCost) })}</span>
+          <span className="afford__assume">{t(luxe ? 'affordAssumeLuxe' : 'affordAssume', { meal: groupSpaces(life.mealPrice), trip: groupSpaces(life.tripCost), pjTrip: groupSpaces(life.luxTripCost), car: groupSpaces(life.carPrice), luxCar: groupSpaces(life.carPrice) })}</span>
         </>
       ) : (
         <p className="serif muted afford__partial" style={{ fontStyle: 'italic' }}>
