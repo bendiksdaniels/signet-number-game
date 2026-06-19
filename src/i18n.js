@@ -72,7 +72,7 @@ export const STRINGS = {
     pjEscapesAYear: 'eralennukireisi aastas',
     pjEscapeAYear: 'eralennukireis aastas',
     affordAssume: '€{meal} eine · €{trip} nädalane reis',
-    affordAssumeLuxe: '€{meal} eine · €{trip} nädalane reis eralennukiga',
+    affordAssumeLuxe: '€{meal} eine · €{trip} nädalane reis · €{pjTrip} eralennukiga',
     asOf: 'Netopalk ja elukallidus: {year}. aasta andmed.',
     returnNote: 'Lähtub Signeti Balti võlakirjafondi {pct}% ajaloolisest tootlusest. Varasem tootlus ei taga tulevast.',
     // room / leaderboard
@@ -168,7 +168,7 @@ export const STRINGS = {
     pjEscapesAYear: 'private-jet escapes a year',
     pjEscapeAYear: 'private-jet escape a year',
     affordAssume: '€{meal} a meal · €{trip} a week away',
-    affordAssumeLuxe: '€{meal} a meal · €{trip} a week by private jet',
+    affordAssumeLuxe: '€{meal} a meal · €{trip} a week away · €{pjTrip} by private jet',
     asOf: 'Net pay & living costs: {year} data.',
     returnNote: 'Assumes the {pct}% historic return of the Signet Baltic Bond Fund. Past performance is no guarantee of future results.',
     roomTitle: "Tonight's room",

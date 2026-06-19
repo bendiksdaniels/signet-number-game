@@ -83,12 +83,12 @@ export function lifestyle(grossMonthly, country, data, tier = 'luxury', target =
   const leftover = Math.max(0, net - living)
 
   const mealsPerWeek = Math.min(MAX_MEALS_PER_WEEK, Math.round(leftover / WEEKS_PER_MONTH / MEAL_PRICE))
-  // Big pots (target >= LUX_TRIP_THRESHOLD) holiday by private jet: pricier trips,
-  // a lower yearly cap, and a different label downstream.
+  const holidaysPerYear = Math.min(MAX_HOLIDAYS_PER_YEAR, Math.floor((leftover * 12) / TRIP_COST))
+  // Big pots (target >= LUX_TRIP_THRESHOLD) ALSO get a private-jet escape line, on
+  // top of the regular holidays: a separate, pricier illustration of the same spare
+  // money. Smaller pots don't show it (pjEscapesPerYear stays 0).
   const luxe = target >= LUX_TRIP_THRESHOLD
-  const tripCost = luxe ? LUX_TRIP_COST : TRIP_COST
-  const tripCap = luxe ? MAX_LUX_TRIPS_PER_YEAR : MAX_HOLIDAYS_PER_YEAR
-  const holidaysPerYear = Math.min(tripCap, Math.floor((leftover * 12) / tripCost))
+  const pjEscapesPerYear = luxe ? Math.min(MAX_LUX_TRIPS_PER_YEAR, Math.floor((leftover * 12) / LUX_TRIP_COST)) : 0
   const affords = net >= living
   const coverPct = living > 0 ? Math.max(1, Math.round((net / living) * 100)) : 100
 
@@ -105,9 +105,11 @@ export function lifestyle(grossMonthly, country, data, tier = 'luxury', target =
     leftover,
     mealsPerWeek,
     holidaysPerYear,
+    pjEscapesPerYear,
+    luxe,
     mealPrice: MEAL_PRICE,
-    tripCost,
-    tripKind: luxe ? 'luxe' : 'standard',
+    tripCost: TRIP_COST,
+    luxTripCost: LUX_TRIP_COST,
     affords,
     coverPct,
     taxRate,

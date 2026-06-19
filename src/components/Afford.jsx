@@ -36,6 +36,16 @@ function Plane() {
   )
 }
 
+// Top-down private-jet silhouette, distinct from the side-profile airliner above
+// so the luxury escape line reads differently from regular holidays.
+function Jet() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+      <path d="M12 2c.7 0 1.25.95 1.5 2.7L14 9l7 4.1v1.9l-7-2.1v3.3l2.2 1.6V21L12 19.8 7.8 21v-1.2L10 18.2v-3.3L3 17v-1.9L10 9l.5-4.3C10.75 2.95 11.3 2 12 2z" />
+    </svg>
+  )
+}
+
 export default function Afford({ life, tier, setTier }) {
   const { t } = useT()
   const reduce = useReducedMotion()
@@ -44,12 +54,9 @@ export default function Afford({ life, tier, setTier }) {
   // Where they live: the luxury tier shows its real prestige district, the
   // cheaper tiers a plain "city centre" / "modest home" label.
   const place = life.tier === 'luxury' ? (life.district || t('tierLuxury')) : t(PLACE_LABEL[life.tier])
-  // Big pots holiday by private jet (calc sets tripKind on the pot size), so the
-  // trip line and the assumption swap to the luxe wording.
-  const luxe = life.tripKind === 'luxe'
-  const holidayKey = life.holidaysPerYear === 1
-    ? (luxe ? 'pjEscapeAYear' : 'holidayAYear')
-    : (luxe ? 'pjEscapesAYear' : 'holidaysAYear')
+  // Big pots ALSO get a private-jet escape line on top of the regular holidays
+  // (calc flags it by pot size), and the assumption gains the jet cost.
+  const luxe = life.luxe
 
   return (
     <div className="afford">
@@ -89,10 +96,16 @@ export default function Afford({ life, tier, setTier }) {
             </span>
             <span className="afford__metric">
               <Plane />
-              <b className="tnum">{life.holidaysPerYear}</b> {t(holidayKey)}
+              <b className="tnum">{life.holidaysPerYear}</b> {t(life.holidaysPerYear === 1 ? 'holidayAYear' : 'holidaysAYear')}
             </span>
+            {luxe && (
+              <span className="afford__metric afford__metric--lux">
+                <Jet />
+                <b className="tnum">{life.pjEscapesPerYear}</b> {t(life.pjEscapesPerYear === 1 ? 'pjEscapeAYear' : 'pjEscapesAYear')}
+              </span>
+            )}
           </div>
-          <span className="afford__assume">{t(luxe ? 'affordAssumeLuxe' : 'affordAssume', { meal: groupSpaces(life.mealPrice), trip: groupSpaces(life.tripCost) })}</span>
+          <span className="afford__assume">{t(luxe ? 'affordAssumeLuxe' : 'affordAssume', { meal: groupSpaces(life.mealPrice), trip: groupSpaces(life.tripCost), pjTrip: groupSpaces(life.luxTripCost) })}</span>
         </>
       ) : (
         <p className="serif muted afford__partial" style={{ fontStyle: 'italic' }}>
