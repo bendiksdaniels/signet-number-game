@@ -295,6 +295,7 @@ svg { display: block; }
 .result__subwrap { min-height: 1.5em; }
 .result__subline { font-size: var(--body-lg); font-weight: var(--fw-medium); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-on-dark); }
 .result__hint { display: block; margin-top: 4px; font-size: var(--body-sm); }
+.result__reality-wrap { min-height: 2.6em; }
 .result__reality { font-style: italic; font-size: var(--body-sm); line-height: var(--lh-snug); color: var(--text-on-dark-muted); max-width: 48ch; }
 .result__buys { width: 100%; max-width: 520px; }
 

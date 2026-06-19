@@ -1,14 +1,13 @@
 // Financial-freedom maths. The headline number is an annuity that draws the pot
-// down to zero by a fixed PLANNING age, and `sustainableMonthly` is what you
-// could draw forever (a real perpetuity) without touching principal, shown
-// behind the "make it last for life" toggle.
+// down to zero by a chosen horizon; `sustainableMonthly` is what you could draw
+// forever (a real perpetuity) without ever touching principal, shown behind the
+// "make it last" toggle.
 //
-// We plan to age 90 (a standard, conservative retirement horizon) rather than to
-// average life expectancy. Planning to life expectancy means a coin-flip chance
-// of outliving your money, and it broke for anyone retiring near or past it (you
-// cannot retire at 70 if the model assumes you are gone by 77). A fixed horizon
-// keeps every retirement age valid and drops the morbid "you die at X" framing.
-export const PLAN_TO_AGE = 90
+// "Spend it down" plans to the average age of death in the player's country, so
+// the pot empties right about when the average person passes. Spending every
+// euro over that realistic horizon (rather than to a padded age 90) is what
+// lifts the monthly figure. Retirement is capped at 70, below every Baltic life
+// expectancy, so this horizon is always positive and no retirement age breaks it.
 
 export function annuityMonthly(target, months, annualRealReturn) {
   const r = annualRealReturn / 12
@@ -17,12 +16,14 @@ export function annuityMonthly(target, months, annualRealReturn) {
 }
 
 export function computeResults({ target, age, retire, country }, data) {
-  const { salary, realReturn } = data
-  const endAge = PLAN_TO_AGE
+  const { salary, realReturn, lifeExp } = data
+  // Draw the pot to zero by the average age of death (rounded), so "spend it
+  // down" really does spend every euro by the time the average person dies.
+  const endAge = Math.round(lifeExp?.[country] ?? 80)
   const years = Math.max(1, endAge - retire)
   const months = years * 12
 
-  // Pot drawn from `retire` to `endAge`, still earning realReturn → hits zero at endAge.
+  // Pot drawn from `retire` to `endAge`, still earning realReturn, hits zero at endAge.
   const monthly = annuityMonthly(target, months, realReturn)
   // Draw only the real return → lasts indefinitely.
   const sustainableMonthly = (target * realReturn) / 12

@@ -49,11 +49,10 @@ export default function Result({ result, player, backend, onPlayAgain }) {
     return () => { alive = false }
   }, []) // eslint-disable-line
 
-  const endAge = Math.round(result.endAge)
   const cc = dict.countryNames[result.country]
-  // Reality check: the pot is planned to 90, but average life expectancy is well
-  // below that, so most people never draw it all down.
-  const avgDeath = Math.round(regional.lifeExp[result.country] ?? 80)
+  // "Spend it down" empties the pot by the average age of death, so the horizon
+  // IS that age; "make it last" never touches the pot at all.
+  const endAge = Math.round(result.endAge)
 
   // The figure currently on stage depends on the honest mode. Everything that
   // compares against salary derives from THIS number so it stays consistent.
@@ -66,7 +65,9 @@ export default function Result({ result, player, backend, onPlayAgain }) {
   const life = lifestyle(shownMonthly, result.country, lifestyleData)
 
   const subline = mode === 'deplete' ? t('perMonthToAge', { age: endAge }) : t('perMonthForever')
-  const hint = mode === 'deplete' ? t('depleteHint', { age: endAge }) : t('foreverHint')
+  const hint = mode === 'deplete' ? t('depleteHint', { age: endAge, country: cc }) : t('foreverHint')
+  // The honest counterpoint to whichever mode is showing.
+  const reality = mode === 'deplete' ? t('deathNote', { country: cc, age: endAge }) : t('foreverNote')
 
   const salaryRows = [
     { label: t('you'), value: shownMonthly, hl: true },
@@ -149,9 +150,20 @@ export default function Result({ result, player, backend, onPlayAgain }) {
             </AnimatePresence>
           </motion.div>
 
-          <motion.p className="serif result__reality" {...block(5)}>
-            {t('deathNote', { country: cc, age: avgDeath })}
-          </motion.p>
+          <motion.div className="result__reality-wrap" {...block(5)}>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={mode}
+                className="serif result__reality"
+                initial={reduce ? false : { opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6 }}
+                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {reality}
+              </motion.p>
+            </AnimatePresence>
+          </motion.div>
 
           <motion.div className="result__buys" {...block(6)}>
             <Afford life={life} />

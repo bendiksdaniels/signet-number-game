@@ -168,7 +168,7 @@ export default function Leaderboard({ stats, rows = [], result, live = false }) 
         className="display tnum"
         style={{ fontSize: 'var(--display-md)', color: 'var(--accent)', marginTop: 'var(--space-2)', lineHeight: 'var(--lh-tight)' }}
       >
-        {t('topPct', { pct: stats?.top ?? '—' })}
+        {t('topPct', { pct: stats?.top ?? '–' })}
       </motion.div>
       <motion.p custom={1} variants={rise} className="serif muted" style={{ fontStyle: 'italic', marginTop: 2 }}>
         {t('outDream', { pct: stats?.percentile ?? 0, total })}
