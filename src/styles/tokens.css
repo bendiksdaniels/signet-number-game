@@ -1,0 +1,139 @@
+/* Design tokens — ported verbatim from the live Signet build (exact colours,
+   spacing, radii, shadows, easings) so the rebuild stays on-brand. Only the
+   three font variables are repointed from the unlicensed trial faces to free,
+   Baltic-complete substitutes (Space Grotesk ↔ Termina, Spectral ↔ Domaine). */
+:root {
+  /* gold ramp + accents */
+  --gold-100: #f3e7d8;
+  --gold-200: #e7d2b9;
+  --gold-300: #d8b48f;
+  --gold-400: #c6986f;
+  --gold-500: #b27e54;
+  --gold-600: #9c6a43;
+  --accent: #b27e54;
+  --accent-on-dark: #c6986f;
+  --accent-hover: #9c6a43;
+  --text-accent: #b27e54;
+  --notice: #b27e54;
+  --notice-tint: #f3e7d8;
+
+  /* paper / surfaces (light side) */
+  --paper-000: #ffffff;
+  --paper-50: #faf7f2;
+  --paper-100: #f4efe7;
+  --paper-200: #e9e1d5;
+  --paper-300: #d8cdbd;
+  --paper-400: #b9ad9b;
+  --surface-page: #faf7f2;
+  --surface-card: #ffffff;
+  --surface-sunken: #f4efe7;
+
+  /* ink / surfaces (dark side) */
+  --ink-500: #6d655b;
+  --ink-600: #4a443d;
+  --ink-700: #34302b;
+  --ink-800: #282623;
+  --ink-900: #1c1a18;
+  --surface-dark: #282623;
+  --surface-dark-raised: #34302b;
+  --border-on-dark: #4a443d;
+
+  /* text */
+  --text-strong: #211f1c;
+  --text-body: #423d37;
+  --text-muted: #6d655b;
+  --text-faint: #8c8377;
+  --text-on-dark: #faf7f2;
+  --text-on-dark-muted: #b8aea0;
+
+  /* greys / borders */
+  --grey-400: #8c8377;
+  --grey-500: #6d655b;
+  --grey-700: #423d37;
+  --grey-900: #211f1c;
+  --border-subtle: #e9e1d5;
+  --border-strong: #d8cdbd;
+  --border-hair: 1px;
+  --border-thick: 2px;
+
+  /* semantic */
+  --positive: #4f7a52;
+  --positive-tint: #e7efe6;
+  --negative: #a23b32;
+  --negative-tint: #f5e4e1;
+
+  /* fonts — repointed to licensed, Baltic-complete substitutes */
+  --font-ui: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-body: "Spectral", Georgia, "Times New Roman", serif;
+
+  /* weights */
+  --fw-thin: 100;
+  --fw-extralight: 200;
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-demi: 600;
+  --fw-bold: 700;
+
+  /* fluid type scale — clamps so one build serves phone → kiosk.
+     min (360px phone) … max (1366px stage). */
+  --label-sm: 11px;
+  --label-md: 12px;
+  --label-lg: 14px;
+  --body-sm: clamp(13px, 1.1vw + 9px, 15px);
+  --body-md: clamp(15px, 1.2vw + 10px, 17px);
+  --body-lg: clamp(16px, 1.4vw + 11px, 19px);
+  --body-xl: clamp(18px, 1.8vw + 12px, 22px);
+  --heading-sm: clamp(14px, 1vw + 11px, 16px);
+  --heading-md: clamp(17px, 1.4vw + 12px, 20px);
+  --heading-lg: clamp(20px, 2.2vw + 13px, 26px);
+  --display-sm: clamp(24px, 3vw + 14px, 30px);
+  --display-md: clamp(30px, 4.4vw + 14px, 44px);
+  --display-lg: clamp(38px, 6vw + 14px, 60px);
+  --display-xl: clamp(52px, 10vw + 12px, 104px);
+
+  /* letter-spacing / line-height */
+  --ls-display: -0.01em;
+  --ls-tight: -0.005em;
+  --ls-normal: 0;
+  --ls-label: 0.14em;
+  --ls-label-wide: 0.22em;
+  --lh-tight: 1.04;
+  --lh-snug: 1.18;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.65;
+
+  /* spacing */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --space-9: 96px; --space-10: 128px; --space-11: 160px;
+  --gutter: clamp(16px, 3vw, 40px);
+  --section-y: clamp(32px, 6vh, 96px);
+
+  /* radii */
+  --radius-xs: 2px; --radius-sm: 4px; --radius-md: 6px;
+  --radius-lg: 10px; --radius-card: 4px; --radius-pill: 999px;
+
+  /* shadows */
+  --shadow-xs: 0 1px 2px rgba(40, 38, 35, 0.06);
+  --shadow-sm: 0 2px 8px rgba(40, 38, 35, 0.08);
+  --shadow-md: 0 8px 24px rgba(40, 38, 35, 0.10);
+  --shadow-lg: 0 20px 48px rgba(40, 38, 35, 0.14);
+  --shadow-dark: 0 24px 60px rgba(0, 0, 0, 0.45);
+
+  /* motion */
+  --dur-fast: 140ms;
+  --dur-base: 240ms;
+  --dur-slow: 480ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* containers + focus */
+  --container-narrow: 760px;
+  --container-max: 1240px;
+  --focus-ring: color-mix(in oklab, #b27e54 55%, transparent);
+
+  /* warm radial that the dark screens sit on (matches the live hero glow) */
+  --hero-glow: radial-gradient(120% 90% at 50% 18%, #3a2c20 0%, #271d16 42%, #1b1410 100%);
+}

@@ -1,0 +1,21 @@
+{
+  "name": "What's Your Number? — Signet Bank",
+  "short_name": "Your Number",
+  "description": "A financial-freedom game by Signet Bank, Investment Festival 2026.",
+  "lang": "et-EE",
+  "dir": "ltr",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": ".",
+  "scope": ".",
+  "background_color": "#1a1410",
+  "theme_color": "#1a1410",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'%3E%3Crect%20width='512'%20height='512'%20rx='96'%20fill='%231a1410'/%3E%3Ctext%20x='256'%20y='370'%20font-size='340'%20text-anchor='middle'%20fill='%23b27e54'%20font-family='Georgia,serif'%3ES%3C/text%3E%3C/svg%3E",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

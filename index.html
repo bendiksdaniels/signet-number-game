@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Kiosk: lock pinch-zoom so the scaled layout can't be zoomed out into a
+         half-blank screen. viewport-fit=cover for iPhone safe areas. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#1a1410" />
+    <!-- Inline SVG favicon derived from the Signet brand: dark rounded tile, gold "S".
+         Kept inline so vite-plugin-singlefile leaves no dangling external reference. -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'&gt;&lt;rect width='16' height='16' rx='3.5' fill='%231a1410'/&gt;&lt;text x='8' y='12.2' font-size='11.5' text-anchor='middle' fill='%23b27e54' font-family='Georgia,serif' font-weight='400'&gt;S&lt;/text&gt;&lt;/svg&gt;" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'&gt;&lt;rect width='180' height='180' fill='%231a1410'/&gt;&lt;text x='90' y='130' font-size='128' text-anchor='middle' fill='%23b27e54' font-family='Georgia,serif'&gt;S&lt;/text&gt;&lt;/svg&gt;" />
+
+    <title>What's Your Number? — Signet Bank</title>
+    <meta name="description" content="What's Your Number? A financial-freedom game by Signet Bank, Investment Festival 2026. Find out how much you need to be free." />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="What's Your Number? by Signet Bank" />
+    <meta property="og:description" content="A financial-freedom game by Signet Bank, Investment Festival 2026. Find out how much you need to be free." />
+    <meta property="og:locale" content="et_EE" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="What's Your Number? by Signet Bank" />
+    <meta name="twitter:description" content="A financial-freedom game by Signet Bank, Investment Festival 2026. Find out how much you need to be free." />
+
+    <link rel="manifest" href="site.webmanifest" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
