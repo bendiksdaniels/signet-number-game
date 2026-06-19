@@ -46,6 +46,12 @@ export function computeResults({ target, age, retire, country }, data) {
 // holidays a year (a EUR 2,000 week away). tax + rent + utilities + free == gross.
 export const MEAL_PRICE = 100
 export const TRIP_COST = 2000
+// Real-world ceilings so a very large pot reads like a life, not "100+". You can
+// eat at most one dinner out a night (7 a week), and a week away every fortnight
+// (26 a year) is already near-permanent travel. Past these the money is there,
+// but the time in the year is not.
+export const MAX_MEALS_PER_WEEK = 7
+export const MAX_HOLIDAYS_PER_YEAR = 26
 // Lifestyle tiers, most expensive first: a prestige-district home, a city-centre
 // flat, or the suburbs. Trading down on rent frees up money to travel, so a
 // smaller number can still buy holidays in a cheaper tier.
@@ -64,8 +70,8 @@ export function lifestyle(grossMonthly, country, data, tier = 'luxury') {
   const living = rent + utilities
   const leftover = Math.max(0, net - living)
 
-  const mealsPerWeek = Math.round(leftover / WEEKS_PER_MONTH / MEAL_PRICE)
-  const holidaysPerYear = Math.floor((leftover * 12) / TRIP_COST)
+  const mealsPerWeek = Math.min(MAX_MEALS_PER_WEEK, Math.round(leftover / WEEKS_PER_MONTH / MEAL_PRICE))
+  const holidaysPerYear = Math.min(MAX_HOLIDAYS_PER_YEAR, Math.floor((leftover * 12) / TRIP_COST))
   const affords = net >= living
   const coverPct = living > 0 ? Math.max(1, Math.round((net / living) * 100)) : 100
 
