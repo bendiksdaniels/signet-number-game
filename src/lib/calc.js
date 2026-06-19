@@ -45,14 +45,20 @@ export function computeResults({ target, age, retire, country }, data) {
 // holidays a year (a EUR 2,000 week away). tax + rent + utilities + free == gross.
 export const MEAL_PRICE = 100
 export const TRIP_COST = 2000
+// Lifestyle tiers, most expensive first: a prestige-district home, a city-centre
+// flat, or the suburbs. Trading down on rent frees up money to travel, so a
+// smaller number can still buy holidays in a cheaper tier.
+export const TIERS = ['luxury', 'central', 'suburb']
 const WEEKS_PER_MONTH = 52 / 12
 
-export function lifestyle(grossMonthly, country, data) {
+export function lifestyle(grossMonthly, country, data, tier = 'luxury') {
   const d = data[country] || data.EE
+  const tiers = d.tiers || {}
+  const t = tiers[tier] || tiers.luxury || {}
   const taxRate = d.investTaxRate ?? 0.2
   const tax = Math.round(grossMonthly * taxRate)
   const net = grossMonthly - tax
-  const rent = Math.round(d.luxuryRentMonthly || 0)
+  const rent = Math.round(t.rent || 0)
   const utilities = Math.round(d.utilitiesMonthly || 0)
   const living = rent + utilities
   const leftover = Math.max(0, net - living)
@@ -64,7 +70,8 @@ export function lifestyle(grossMonthly, country, data) {
 
   return {
     capital: d.capital,
-    district: d.district,
+    tier,
+    district: t.district || null,
     gross: grossMonthly,
     tax,
     net,
@@ -87,4 +94,14 @@ export function lifestyle(grossMonthly, country, data) {
       { key: 'free', value: leftover },
     ],
   }
+}
+
+// The most aspirational tier the income can still take at least one holiday in.
+// Used as the default so a modest number lands on "city centre + travel" rather
+// than "luxury district + nothing left".
+export function bestTier(grossMonthly, country, data) {
+  for (const tier of TIERS) {
+    if (lifestyle(grossMonthly, country, data, tier).holidaysPerYear >= 1) return tier
+  }
+  return 'suburb'
 }

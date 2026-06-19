@@ -1,63 +1,49 @@
 {
-  "as_of": "2025",
-  "assumptions": "'Eating out every day' = one 3-course dinner per day at a good mid-to-upper restaurant, 30 days/month (mealPrice x 30). 'A trip' = one nice ~6-night Mediterranean holiday for one person (round-trip flight + 4-star solo room + spending); divide an annual budget by tripCost for trips/year.",
+  "as_of": "2026",
+  "assumptions": "Three lifestyle tiers per capital (a prestige-district home, a city-centre 1-bed, or a suburban 1-bed) with sourced average rents. Investment income is taxed, then rent + utilities come out; whatever is left buys EUR 100 restaurant dinners (per week) and EUR 2,000 one-week holidays (per year). Trading down a tier frees rent for travel.",
   "EE": {
     "capital": "Tallinn",
-    "district": "Kadriorg",
-    "luxuryRentMonthly": 1300,
-    "mealPrice": 40,
-    "diningOutMonthly": 1200,
-    "tripCost": 1500,
+    "tiers": {
+      "luxury": { "district": "Kadriorg", "rent": 1300 },
+      "central": { "rent": 716 },
+      "suburb": { "rent": 523 }
+    },
     "utilitiesMonthly": 285,
     "investTaxRate": 0.22,
     "sources": [
-      "https://www.numbeo.com/cost-of-living/in/Tallinn (updated 2026-06; 3-course meal for 2 = EUR 80 -> EUR 40/person; city-centre 1-bed avg EUR 709; Basic Utilities for 85m2 = EUR 285.14/mo; Internet 60Mbps+ = EUR 28.97/mo)",
-      "https://www.ey.com/en_ee/insights/tax/significant-tax-changes-in-estonia-in-2025-2026 + https://www.emta.ee/en/private-client/taxes-and-payment/declaration-income/tax-rates (Estonia flat personal income tax incl. capital gains/investment income = 22% from 1 Jan 2025, up from 20%; as of 2025/2026)",
-      "https://investropa.com/blogs/news/tallinn-rents (early 2026; premium central/furnished 1-2BR EUR 1200-1500)",
-      "https://kadriorgapartments.ee (Kadriorg multi-room from EUR 1300)",
-      "city24.ee / kv.ee Tallinn rental market (Old Town & Kadriorg 60-90 m2 luxury 800-1700/mo)",
-      "https://bryanestates.ee + investropa.com (Kadriorg = top prestige residential district, 2025)",
-      "airbaltic.com flight deals (TLL-Malaga/Barcelona RT ~EUR 260-320) + booking.com 4-star Barcelona ~EUR 150/night"
-    ],
-    "confidence": "District HIGH (Old Town close runner-up). Meal HIGH (Numbeo-anchored). Rent MEDIUM-HIGH, luxury band EUR 800-1700, point 1300 from secondary sources not live scrapes. Trip MEDIUM, range EUR 1200-1800, season/destination-sensitive."
+      "https://www.numbeo.com/cost-of-living/in/Tallinn (2026: 1-bed city centre EUR 716, outside centre EUR 523; Basic Utilities 85m2 = EUR 285/mo; 3-course meal for 2 = EUR 80)",
+      "https://kadriorgapartments.ee + city24.ee/kv.ee (Kadriorg/Old Town prestige 60-90 m2 EUR 800-1700, point 1300)",
+      "https://www.emta.ee/en/private-client + EY (Estonia flat personal income tax incl. investment income = 22% from 1 Jan 2025)"
+    ]
   },
   "LV": {
     "capital": "Riga",
-    "district": "Klusais centrs (Quiet Centre)",
-    "luxuryRentMonthly": 1200,
-    "mealPrice": 30,
-    "diningOutMonthly": 900,
-    "tripCost": 1500,
+    "tiers": {
+      "luxury": { "district": "Klusais centrs", "rent": 1200 },
+      "central": { "rent": 528 },
+      "suburb": { "rent": 355 }
+    },
     "utilitiesMonthly": 319,
     "investTaxRate": 0.20,
     "sources": [
-      "https://www.numbeo.com/cost-of-living/in/Riga (updated 2026-06; 3-course meal for 2 = EUR 60 -> EUR 30/person; city-centre 1-bed avg EUR 528; Basic Utilities for 85m2 = EUR 319.49/mo, range 250-500; Internet 60Mbps+ = EUR 17.55/mo)",
-      "https://taxsummaries.pwc.com/latvia/individual/income-determination (Latvia capital gains/capital income standard PIT = 25.5% from 2025; transitional 20% rate applies 2025-2027 to assets held/initiated before 31 Dec 2024 - used 0.20 as representative resident rate; +3% surcharge above EUR 200k income)",
-      "https://www.ss.com/en/real-estate/flats/riga/centre/hand_over/ (Quiet Centre / centre rentals)",
-      "https://www.city24.lv/en/real-estate/apartments-for-rent/riga-centrs-elizabetes-iela (restored Art Nouveau 61.5 m2 EUR 1476)",
-      "https://investropa.com/blogs/news/riga-rents (Jan 2026; premium 2BR EUR 1100-1600+)",
-      "https://neighborhood.lv/en/real-estate/myths-and-truths-about-living-in-the-rigas-quiet-center/ (Klusais centrs = top prestige Art Nouveau embassy district; Vecriga/Old Town alternative)",
-      "airbaltic.com (RIX-Barcelona RT ~EUR 274-300) + booking.com 4-star + Spain INE 4-star ADR EUR 130-240/night"
-    ],
-    "confidence": "District HIGH (canonical prestige district; Old Town alternative). Meal HIGH (Numbeo-anchored). Rent MEDIUM, luxury band EUR 630-1500+, prestige tier priced by heritage fit-out more than m2; a distinct 'premium 2BR' line would be ~EUR 1500. Trip MEDIUM-HIGH, range EUR 1200-1800."
+      "https://www.numbeo.com/cost-of-living/in/Riga (2026: 1-bed city centre EUR 528, outside centre EUR 355; Basic Utilities 85m2 = EUR 319/mo; 3-course meal for 2 = EUR 60)",
+      "https://www.ss.com / city24.lv (Klusais centrs prestige Art Nouveau rentals, point 1200)",
+      "https://taxsummaries.pwc.com/latvia (capital income standard 25.5% from 2025; transitional 20% on pre-2025 assets used as representative resident rate)"
+    ]
   },
   "LT": {
     "capital": "Vilnius",
-    "district": "Senamiestis (Old Town)",
-    "luxuryRentMonthly": 1350,
-    "mealPrice": 30,
-    "diningOutMonthly": 900,
-    "tripCost": 1500,
+    "tiers": {
+      "luxury": { "district": "Senamiestis", "rent": 1350 },
+      "central": { "rent": 766 },
+      "suburb": { "rent": 567 }
+    },
     "utilitiesMonthly": 199,
     "investTaxRate": 0.15,
     "sources": [
-      "https://www.numbeo.com/cost-of-living/in/Vilnius (updated 2026-06; 3-course meal for 2 = EUR 65 -> ~EUR 32/person, used 30; city-centre 1-bed avg EUR 766; Basic Utilities for 85m2 = EUR 199.12/mo; Internet 60Mbps+ = EUR 17.51/mo)",
-      "https://taxsummaries.pwc.com/lithuania/individual/income-determination (Lithuania GPM on dividends = flat 15%; capital gains taxed 15% up to EUR 253,065/yr, 20% above - used 0.15 as representative resident rate; 2025. 2026 reform makes employment income progressive but dividends/certain capital gains stay flat 15%)",
-      "https://www.domoplius.lt (Old Town 2-room 57 m2 EUR 1200; 3-room 99 m2 EUR 1500; central 60-90 m2 at 20-30 EUR/m2)",
-      "https://investropa.com/blogs/news/vilnius (2026; high-end 2-bed Senamiestis/Zverynas EUR 1100-1700/mo)",
-      "Global Property Guide / Investropa (Senamiestis, Zverynas, Uzupis = top neighbourhoods ~EUR 3800-6500/m2)",
-      "Ryanair/Wizz/Kiwi.com (VNO-Barcelona RT ~EUR 180-260) + booking.com 4-star + INE Spain 4-star ADR (Aug 2025 EUR 163.8/night)"
-    ],
-    "confidence": "District HIGH (Senamiestis = single most prestigious central address; Zverynas co-prestige villa district). Meal HIGH (Numbeo-anchored, slightly conservative vs EUR 32). Rent HIGH for the EUR 1100-1700 band, point 1350. Trip MEDIUM-HIGH, range EUR 1200-1800; aruodas.lt/kampas.lt blocked automated fetch so rent leans on domoplius live listings + secondaries."
+      "https://www.numbeo.com/cost-of-living/in/Vilnius (2026: 1-bed city centre EUR 766, outside centre EUR 567; Basic Utilities 85m2 = EUR 199/mo; 3-course meal for 2 = EUR 65)",
+      "https://www.domoplius.lt / investropa.com (Senamiestis/Old Town prestige 57-99 m2 EUR 1200-1500, point 1350)",
+      "https://taxsummaries.pwc.com/lithuania (GPM on dividends/representative capital gains = flat 15%)"
+    ]
   }
 }
