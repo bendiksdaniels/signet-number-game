@@ -1,14 +1,13 @@
 {
   "as_of": "2026",
-  "assumptions": "Three lifestyle tiers per capital: a prestige-district home (city-specific sourced rent), a city-centre home (EUR 700 representative), or a modest home (EUR 500 representative). Investment income is taxed, then rent + utilities come out; whatever is left buys EUR 100 restaurant dinners (per week) and EUR 2,000 one-week holidays (per year). Trading down a tier frees rent for travel.",
+  "assumptions": "Three lifestyle tiers per capital: a prestige-district home (city-specific sourced rent, EUR 360 utilities), a city-centre home (EUR 700 rent, EUR 280 utilities), or a modest home (EUR 500 rent, EUR 200 utilities). Utilities scale with home size. Investment income is taxed, then rent + utilities come out; whatever is left buys EUR 100 restaurant dinners (per week) and EUR 2,000 one-week holidays (per year). Trading down a tier frees rent for travel.",
   "EE": {
     "capital": "Tallinn",
     "tiers": {
-      "luxury": { "district": "Kadriorg", "rent": 1300 },
-      "central": { "rent": 700 },
-      "suburb": { "rent": 500 }
+      "luxury": { "district": "Kadriorg", "rent": 1300, "utilities": 360 },
+      "central": { "rent": 700, "utilities": 280 },
+      "suburb": { "rent": 500, "utilities": 200 }
     },
-    "utilitiesMonthly": 285,
     "investTaxRate": 0.22,
     "sources": [
       "https://www.numbeo.com/cost-of-living/in/Tallinn (2026: 1-bed city centre EUR 716, outside centre EUR 523; Basic Utilities 85m2 = EUR 285/mo; 3-course meal for 2 = EUR 80)",
@@ -19,11 +18,10 @@
   "LV": {
     "capital": "Riga",
     "tiers": {
-      "luxury": { "district": "Klusais centrs", "rent": 1200 },
-      "central": { "rent": 700 },
-      "suburb": { "rent": 500 }
+      "luxury": { "district": "Klusais centrs", "rent": 1200, "utilities": 360 },
+      "central": { "rent": 700, "utilities": 280 },
+      "suburb": { "rent": 500, "utilities": 200 }
     },
-    "utilitiesMonthly": 319,
     "investTaxRate": 0.20,
     "sources": [
       "https://www.numbeo.com/cost-of-living/in/Riga (2026: 1-bed city centre EUR 528, outside centre EUR 355; Basic Utilities 85m2 = EUR 319/mo; 3-course meal for 2 = EUR 60)",
@@ -34,11 +32,10 @@
   "LT": {
     "capital": "Vilnius",
     "tiers": {
-      "luxury": { "district": "Senamiestis", "rent": 1350 },
-      "central": { "rent": 700 },
-      "suburb": { "rent": 500 }
+      "luxury": { "district": "Senamiestis", "rent": 1350, "utilities": 360 },
+      "central": { "rent": 700, "utilities": 280 },
+      "suburb": { "rent": 500, "utilities": 200 }
     },
-    "utilitiesMonthly": 199,
     "investTaxRate": 0.15,
     "sources": [
       "https://www.numbeo.com/cost-of-living/in/Vilnius (2026: 1-bed city centre EUR 766, outside centre EUR 567; Basic Utilities 85m2 = EUR 199/mo; 3-course meal for 2 = EUR 65)",

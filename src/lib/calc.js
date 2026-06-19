@@ -69,7 +69,9 @@ export function lifestyle(grossMonthly, country, data, tier = 'luxury') {
   const tax = Math.round(grossMonthly * taxRate)
   const net = grossMonthly - tax
   const rent = Math.round(t.rent || 0)
-  const utilities = Math.round(d.utilitiesMonthly || 0)
+  // Utilities scale with the home (bigger tier = more to heat/power), so they live
+  // on the tier; fall back to a country-level figure if a tier omits them.
+  const utilities = Math.round(t.utilities ?? d.utilitiesMonthly ?? 0)
   const living = rent + utilities
   const leftover = Math.max(0, net - living)
 
