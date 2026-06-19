@@ -44,6 +44,12 @@ export default function Afford({ life, tier, setTier }) {
   // Where they live: the luxury tier shows its real prestige district, the
   // cheaper tiers a plain "city centre" / "modest home" label.
   const place = life.tier === 'luxury' ? (life.district || t('tierLuxury')) : t(PLACE_LABEL[life.tier])
+  // Big pots holiday by private jet (calc sets tripKind on the pot size), so the
+  // trip line and the assumption swap to the luxe wording.
+  const luxe = life.tripKind === 'luxe'
+  const holidayKey = life.holidaysPerYear === 1
+    ? (luxe ? 'pjEscapeAYear' : 'holidayAYear')
+    : (luxe ? 'pjEscapesAYear' : 'holidaysAYear')
 
   return (
     <div className="afford">
@@ -83,10 +89,10 @@ export default function Afford({ life, tier, setTier }) {
             </span>
             <span className="afford__metric">
               <Plane />
-              <b className="tnum">{life.holidaysPerYear}</b> {t(life.holidaysPerYear === 1 ? 'holidayAYear' : 'holidaysAYear')}
+              <b className="tnum">{life.holidaysPerYear}</b> {t(holidayKey)}
             </span>
           </div>
-          <span className="afford__assume">{t('affordAssume', { meal: groupSpaces(life.mealPrice), trip: groupSpaces(life.tripCost) })}</span>
+          <span className="afford__assume">{t(luxe ? 'affordAssumeLuxe' : 'affordAssume', { meal: groupSpaces(life.mealPrice), trip: groupSpaces(life.tripCost) })}</span>
         </>
       ) : (
         <p className="serif muted afford__partial" style={{ fontStyle: 'italic' }}>

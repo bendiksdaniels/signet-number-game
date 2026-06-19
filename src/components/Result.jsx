@@ -66,7 +66,7 @@ export default function Result({ result, player, backend, onPlayAgain }) {
 
   // Realistic lifestyle the income buys for the chosen home tier (gross, less
   // tax, rent, utilities); whatever is free becomes dinners out and holidays.
-  const life = lifestyle(shownMonthly, result.country, lifestyleData, tier)
+  const life = lifestyle(shownMonthly, result.country, lifestyleData, tier, result.target)
 
   const subline = mode === 'deplete' ? t('perMonthToAge', { age: endAge }) : t('perMonthForever')
   const hint = mode === 'deplete' ? t('depleteHint', { age: endAge, country: cc }) : t('foreverHint')
