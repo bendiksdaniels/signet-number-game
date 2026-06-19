@@ -1,7 +1,7 @@
 {
   "as_of": "2024",
-  "realReturn": 0.03,
-  "realReturnNote": "Conservative real (after-inflation) annual return assumed while the pot keeps working in retirement.",
+  "investReturn": 0.076,
+  "investReturnNote": "Signet Baltic Bond Fund historic return, net of fees, nominal. Assumed while the pot stays invested, for both spending it down and living off the yield. Past performance is not a guarantee of future results.",
   "salary": { "EE": 1560, "LV": 1221, "LT": 1407 },
   "lifeExp": { "EE": 79.5, "LV": 76.7, "LT": 77.5 },
   "sources": {
@@ -16,6 +16,14 @@
       "EE": { "value": 79.5, "as_of": "2024", "source": "Statistics Estonia", "url": "https://stat.ee/en/news/life-expectancy-estonia-795-years" },
       "LV": { "value": 76.7, "as_of": "2024", "confidence": "provisional", "source": "Eurostat (provisional 2024)", "url": "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260313-3" },
       "LT": { "value": 77.5, "as_of": "2024", "source": "Statistics Lithuania / Institute of Hygiene; Eurostat provisional", "url": "https://countryeconomy.com/demography/life-expectancy/lithuania" }
+    },
+    "investReturn": {
+      "value": 0.076,
+      "fund": "Signet Baltic Bond Fund",
+      "isin": "LV0000104073",
+      "basis": "Fund historic return, net of fees, nominal (EUR UCITS, inception 09/05/2025). Factsheet 31/05/2026: 7.36% since-inception annualized, 7.76% trailing 12m, ~8.4% weighted-average YTM. Short track record, so shown with a past-performance disclaimer.",
+      "source": "Signet Bank",
+      "url": "https://signetbank.com/en/where-to-invest/signet-baltic-bond-fund/"
     }
   }
 }

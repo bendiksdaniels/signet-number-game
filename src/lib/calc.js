@@ -1,7 +1,7 @@
 // Financial-freedom maths. The headline number is an annuity that draws the pot
 // down to zero by a chosen horizon; `sustainableMonthly` is what you could draw
-// forever (a real perpetuity) without ever touching principal, shown behind the
-// "make it last" toggle.
+// forever (a perpetuity at the fund's yield) without touching principal, shown
+// behind the "make it last" toggle.
 //
 // "Spend it down" plans to the average age of death in the player's country, so
 // the pot empties right about when the average person passes. Spending every
@@ -16,17 +16,20 @@ export function annuityMonthly(target, months, annualRealReturn) {
 }
 
 export function computeResults({ target, age, retire, country }, data) {
-  const { salary, realReturn, lifeExp } = data
+  const { salary, investReturn, lifeExp } = data
   // Draw the pot to zero by the average age of death (rounded), so "spend it
   // down" really does spend every euro by the time the average person dies.
   const endAge = Math.round(lifeExp?.[country] ?? 80)
   const years = Math.max(1, endAge - retire)
   const months = years * 12
 
-  // Pot drawn from `retire` to `endAge`, still earning realReturn, hits zero at endAge.
-  const monthly = annuityMonthly(target, months, realReturn)
-  // Draw only the real return → lasts indefinitely.
-  const sustainableMonthly = (target * realReturn) / 12
+  // The pot stays invested in the Signet Baltic Bond Fund (investReturn) in BOTH
+  // modes, so they stay consistent: spending it down draws principal + yield to
+  // zero by endAge, while "make it last" draws only the yield and never touches
+  // principal. One shared rate guarantees spend-down >= live-off-yield (no odd
+  // inversion where preserving the pot would somehow pay more than emptying it).
+  const monthly = annuityMonthly(target, months, investReturn)
+  const sustainableMonthly = (target * investReturn) / 12
 
   const avgSalary = salary[country] ?? 0
   const multiple = avgSalary ? monthly / avgSalary : 0

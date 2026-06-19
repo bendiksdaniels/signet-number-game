@@ -192,7 +192,7 @@ export default function Result({ result, player, backend, onPlayAgain }) {
             </motion.p>
           </AnimatePresence>
           <span className="result__asof">
-            {t('returnNote', { pct: Math.round(regional.realReturn * 100) })} {t('asOf', { year: regional.as_of })}
+            {t('returnNote', { pct: (regional.investReturn * 100).toFixed(1) })} {t('asOf', { year: regional.as_of })}
           </span>
         </motion.div>
 
@@ -219,7 +219,7 @@ export default function Result({ result, player, backend, onPlayAgain }) {
           {/* TODO(Signet): set the real booking URL. Placeholder points to the site. */}
           <a
             className="btn btn--primary"
-            href="https://signetbank.com"
+            href="https://signetbank.com/en/"
             target="_blank"
             rel="noopener noreferrer"
           >

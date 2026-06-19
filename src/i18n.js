@@ -71,7 +71,7 @@ export const STRINGS = {
     holidayAYear: 'reis aastas',
     affordAssume: '€{meal} eine · €{trip} nädalane reis',
     asOf: 'Netopalk ja elukallidus: {year}. aasta andmed.',
-    returnNote: 'Eeldab {pct}% reaalset aastatootlust.',
+    returnNote: 'Lähtub Signeti Balti võlakirjafondi {pct}% ajaloolisest tootlusest. Varasem tootlus ei taga tulevast.',
     // room / leaderboard
     roomTitle: 'Tänane saal',
     liveTag: 'live',
@@ -164,7 +164,7 @@ export const STRINGS = {
     holidayAYear: 'holiday a year',
     affordAssume: '€{meal} a meal · €{trip} a week away',
     asOf: 'Net pay & living costs: {year} data.',
-    returnNote: 'Assumes a {pct}% real annual return.',
+    returnNote: 'Assumes the {pct}% historic return of the Signet Baltic Bond Fund. Past performance is no guarantee of future results.',
     roomTitle: "Tonight's room",
     liveTag: 'live',
     topPct: 'Top {pct}%',
