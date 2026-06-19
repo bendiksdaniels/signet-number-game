@@ -1,6 +1,12 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useT } from '../i18n.js'
 import { formatEur, groupSpaces } from '../lib/format.js'
+import { TIERS } from '../lib/calc.js'
+
+// Home tiers, fanciest first: each maps to a short selector label and (for the
+// cheaper two) a place name; luxury shows its real prestige district instead.
+const TIER_LABEL = { luxury: 'tierLuxury', central: 'tierCentral', suburb: 'tierModest' }
+const PLACE_LABEL = { central: 'placeCentral', suburb: 'placeModest' }
 
 // Visual "what your number buys": one bar splits the monthly income into tax, a
 // luxury home (rent), utilities and what's free. The free part is then pictured
@@ -30,17 +36,20 @@ function Plane() {
   )
 }
 
-export default function Afford({ life }) {
+export default function Afford({ life, tier, setTier }) {
   const { t } = useT()
   const reduce = useReducedMotion()
   const total = Math.max(life.gross, life.tax + life.living) || 1
   const segs = life.segments.filter((s) => s.value > 0)
+  // Where they live: the luxury tier shows its real prestige district, the
+  // cheaper tiers a plain "city centre" / "modest home" label.
+  const place = life.tier === 'luxury' ? (life.district || t('tierLuxury')) : t(PLACE_LABEL[life.tier])
 
   return (
     <div className="afford">
       <div className="afford__head">
         <span className="kicker">{t('whatItBuys')}</span>
-        <span className="afford__place serif">{life.capital} · {life.district}</span>
+        <span className="afford__place serif">{life.capital} · {place}</span>
       </div>
 
       <div className="afford__bar" role="img" aria-label={t('whatItBuys')}>
@@ -70,11 +79,11 @@ export default function Afford({ life }) {
           <div className="afford__metrics">
             <span className="afford__metric">
               <Fork />
-              <b className="tnum">{life.mealsPerWeek}</b> {t('mealsAWeek')}
+              <b className="tnum">{life.mealsPerWeek}</b> {t(life.mealsPerWeek === 1 ? 'mealAWeek' : 'mealsAWeek')}
             </span>
             <span className="afford__metric">
               <Plane />
-              <b className="tnum">{life.holidaysPerYear}</b> {t('holidaysAYear')}
+              <b className="tnum">{life.holidaysPerYear}</b> {t(life.holidaysPerYear === 1 ? 'holidayAYear' : 'holidaysAYear')}
             </span>
           </div>
           <span className="afford__assume">{t('affordAssume', { meal: groupSpaces(life.mealPrice), trip: groupSpaces(life.tripCost) })}</span>
@@ -83,6 +92,25 @@ export default function Afford({ life }) {
         <p className="serif muted afford__partial" style={{ fontStyle: 'italic' }}>
           {t('buysPartial', { capital: life.capital, pct: life.coverPct })}
         </p>
+      )}
+
+      {setTier && (
+        <div className="afford__homepick">
+          <div className="afford__tiers" role="group" aria-label={t('chooseHome')}>
+            {TIERS.map((ti) => (
+              <button
+                key={ti}
+                type="button"
+                className="afford__tier"
+                aria-pressed={tier === ti}
+                onClick={() => setTier(ti)}
+              >
+                {t(TIER_LABEL[ti])}
+              </button>
+            ))}
+          </div>
+          <span className="afford__tierhint">{t('tierHint')}</span>
+        </div>
       )}
     </div>
   )

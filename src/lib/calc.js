@@ -103,12 +103,19 @@ export function lifestyle(grossMonthly, country, data, tier = 'luxury') {
   }
 }
 
-// The most aspirational tier the income can still take at least one holiday in.
-// Used as the default so a modest number lands on "city centre + travel" rather
-// than "luxury district + nothing left".
+// The fanciest home the income can COMFORTABLY carry: one where the money left
+// after the home and bills is at least what the home and bills cost (coverage of
+// 200%+), so you are not "barely affording" the luxury district. A tight budget
+// therefore defaults to a cheaper, modest home where it can still live well and
+// travel. If nothing is comfortable, fall back to the cheapest home it can
+// afford at all, then to the cheapest tier regardless.
 export function bestTier(grossMonthly, country, data) {
   for (const tier of TIERS) {
-    if (lifestyle(grossMonthly, country, data, tier).holidaysPerYear >= 1) return tier
+    const l = lifestyle(grossMonthly, country, data, tier)
+    if (l.affords && l.leftover >= l.living) return tier
   }
-  return 'suburb'
+  for (let i = TIERS.length - 1; i >= 0; i--) {
+    if (lifestyle(grossMonthly, country, data, TIERS[i]).affords) return TIERS[i]
+  }
+  return TIERS[TIERS.length - 1]
 }

@@ -317,6 +317,11 @@ svg { display: block; }
 .afford__metric b { font-family: var(--font-display); font-size: var(--display-sm); font-weight: var(--fw-bold); margin-right: 2px; color: var(--text-on-dark); }
 .afford__assume { display: block; margin-top: 2px; font-size: var(--label-md); letter-spacing: 0.04em; color: var(--text-on-dark-muted); opacity: 0.85; }
 .afford__partial { font-size: var(--body-md); }
+.afford__homepick { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.afford__tiers { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.afford__tier { padding: 6px 14px; border-radius: var(--radius-pill); border: var(--border-hair) solid var(--border-on-dark); font-size: var(--label-md); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--text-on-dark-muted); transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
+.afford__tier[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 16%, transparent); color: var(--text-on-dark); }
+.afford__tierhint { font-size: var(--label-md); color: var(--text-on-dark-muted); opacity: 0.85; font-style: italic; font-family: var(--font-body); }
 
 /* honest deplete/forever segmented toggle */
 .modeseg { display: inline-grid; grid-auto-flow: column; gap: 0; border: var(--border-hair) solid var(--border-on-dark); border-radius: var(--radius-sm); overflow: hidden; align-self: flex-start; }

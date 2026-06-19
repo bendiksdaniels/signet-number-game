@@ -9,7 +9,7 @@ import LeadCapture from './LeadCapture.jsx'
 import Afford from './Afford.jsx'
 import regional from '../data/regional.json'
 import lifestyleData from '../data/lifestyle.json'
-import { lifestyle } from '../lib/calc.js'
+import { lifestyle, bestTier } from '../lib/calc.js'
 
 // Centerpiece: the two-panel result. LEFT (dark) is the emotional payoff: the
 // big "freedom income" with an HONEST deplete/forever toggle, a salary
@@ -21,6 +21,10 @@ export default function Result({ result, player, backend, onPlayAgain }) {
   const [stats, setStats] = useState(null)
   const [rows, setRows] = useState([])
   const [mode, setMode] = useState('deplete') // honest default: pot runs out at life expectancy
+  // Default to the fanciest home the number can comfortably carry, so a smaller
+  // pot lands on a modest home it can actually live in (and still travel from)
+  // instead of "barely affording" the luxury district. Users can re-pick.
+  const [tier, setTier] = useState(() => bestTier(result.monthly, result.country, lifestyleData))
 
   // Submit the entry ONCE (the ref guards StrictMode's double-invoke), but
   // ALWAYS load the room afterwards. Gating the read behind the same guard was
@@ -60,9 +64,9 @@ export default function Result({ result, player, backend, onPlayAgain }) {
   const avg = regional.salary[result.country] || 0
   const shownMultiple = avg ? shownMonthly / avg : 0
 
-  // Realistic lifestyle the income buys in the capital's luxury district
-  // (gross, less tax, rent, utilities and eating out every day).
-  const life = lifestyle(shownMonthly, result.country, lifestyleData)
+  // Realistic lifestyle the income buys for the chosen home tier (gross, less
+  // tax, rent, utilities); whatever is free becomes dinners out and holidays.
+  const life = lifestyle(shownMonthly, result.country, lifestyleData, tier)
 
   const subline = mode === 'deplete' ? t('perMonthToAge', { age: endAge }) : t('perMonthForever')
   const hint = mode === 'deplete' ? t('depleteHint', { age: endAge, country: cc }) : t('foreverHint')
@@ -166,7 +170,7 @@ export default function Result({ result, player, backend, onPlayAgain }) {
           </motion.div>
 
           <motion.div className="result__buys" {...block(6)}>
-            <Afford life={life} />
+            <Afford life={life} tier={tier} setTier={setTier} />
           </motion.div>
         </div>
 
