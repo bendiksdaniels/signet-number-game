@@ -4,10 +4,13 @@ import { rise, StepDots } from './ui.jsx'
 
 const COUNTRIES = ['EE', 'LV', 'LT']
 const AGE_MIN = 16
-const AGE_MAX = 75
-const RETIRE_MAX = 80
+// Current age caps one below the retirement cap so retire can always sit above
+// age (retireMin = age + 1). If AGE_MAX ever reaches RETIRE_MAX the retire
+// slider's min would exceed its max and break.
+const AGE_MAX = 69
+const RETIRE_MAX = 70
 
-// Step 2 of 2 — collects name, age, retirement age and country, then submits.
+// Step 2 of 2: collects name, age, retirement age and country, then submits.
 // `draft` holds live values; patch via onChange({ field }). Submit with onSubmit({}).
 export default function StepAbout({ draft, onChange, onBack, onSubmit }) {
   const { t, dict } = useT()

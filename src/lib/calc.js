@@ -1,12 +1,12 @@
 // Financial-freedom maths. The headline number is an annuity that draws the pot
 // down to zero by a fixed PLANNING age, and `sustainableMonthly` is what you
-// could draw forever (a real perpetuity) without touching principal — shown
+// could draw forever (a real perpetuity) without touching principal, shown
 // behind the "make it last for life" toggle.
 //
 // We plan to age 90 (a standard, conservative retirement horizon) rather than to
 // average life expectancy. Planning to life expectancy means a coin-flip chance
 // of outliving your money, and it broke for anyone retiring near or past it (you
-// cannot retire at 80 if the model assumes you are gone by 77). A fixed horizon
+// cannot retire at 70 if the model assumes you are gone by 77). A fixed horizon
 // keeps every retirement age valid and drops the morbid "you die at X" framing.
 export const PLAN_TO_AGE = 90
 
@@ -86,7 +86,7 @@ export function lifestyle(grossMonthly, country, data, tier = 'luxury') {
     affords,
     coverPct,
     taxRate,
-    // Segments sum to gross — drives the breakdown bar. 'free' is the gold slice.
+    // Segments sum to gross, driving the breakdown bar. 'free' is the gold slice.
     segments: [
       { key: 'tax', value: tax },
       { key: 'rent', value: rent },
